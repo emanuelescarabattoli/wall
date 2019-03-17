@@ -1,0 +1,10 @@
+version: '2'
+services:
+   db:
+    image: postgres:10
+    environment:
+      - POSTGRES_DB=wall
+      - POSTGRES_USER=wall
+      - POSTGRES_PASSWORD=wall
+    ports:
+      - "5000:5432"

@@ -1,0 +1,19 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5000,
+    "username": "wall",
+    "password": "wall",
+    "database": "wall",
+    "synchronize": true,
+    "entities": [
+        "src/**/**.entity.ts"
+    ],
+    "migrations": [
+        "src/**/**.migration.ts"
+    ],
+    "migrationsTableName": "migrations",
+    "cli": {
+        "migrationsDir": "src/migrations"
+    }
+}
