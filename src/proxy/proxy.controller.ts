@@ -40,4 +40,32 @@ export class ProxyController {
       throw new BadRequestException(error.response.data);
     }
   }
+
+  @Put('*')
+  async put(@Req() request: IncomingMessage, @Body() body) {
+    try {
+      const url = resolveRoute(request.url);
+      const jwt = request.headers.authorization.replace('Bearer ', '');
+      const jwtData: any = this.jwtService.decode(jwt);
+      const username = jwtData.username;
+      const response = await this.httpService.put(url, body, { headers: { username } }).toPromise();
+      return response.data;
+    } catch (error) {
+      throw new BadRequestException(error.response.data);
+    }
+  }
+
+  @Delete('*')
+  async delete(@Req() request: IncomingMessage) {
+    try {
+      const url = resolveRoute(request.url);
+      const jwt = request.headers.authorization.replace('Bearer ', '');
+      const jwtData: any = this.jwtService.decode(jwt);
+      const username = jwtData.username;
+      const response = await this.httpService.delete(url, { headers: { username } }).toPromise();
+      return response.data;
+    } catch (error) {
+      throw new BadRequestException(error.response.data);
+    }
+  }
 }
